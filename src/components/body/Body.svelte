@@ -11,10 +11,25 @@
   import PreformativePrefixesSelect from "../selects/PreformativePrefixesSelect.svelte";
   import ProcliticsSelect from "../selects/ProcliticsSelect.svelte";
   import OptionsSelect from "../selects/OptionsSelect.svelte";
+  import Results from "../results/Results.svelte";
 
   import { onMount } from "svelte";
 
   let sumerianVerbs = [];
+
+  const COLORS = {
+    subject: "#597ef7",
+    directObject: "#73d13d",
+    indirectObject: "#ff7a45",
+    obliqueObject: "#9254de",
+    dimensionalPrefix: "#f759ab",
+    initialPersonPrefix: "#ffd6e7",
+    preformative: "#ff4d4f",
+    proclitic: "#ffa940",
+    ventive: "#36cfc9",
+    middleMarker: "#ff4d4f",
+    reduplicated: "#b7eb8f"
+  };
 
   // fetches default verbs
   onMount(async () => {
@@ -28,6 +43,7 @@
         syncSumerianVerbs.push(sumerianVerbsStorage[key])
       );
       sumerianVerbs = [...syncSumerianVerbs];
+      verb.defaultVerbs = [...sumerianVerbs];
     } else {
       // fetches sumerian verbs
       try {
@@ -45,6 +61,7 @@
           syncSumerianVerbs.push(sumerianVerbsJSON["sumerian_verbs"][key])
         );
         sumerianVerbs = [...syncSumerianVerbs];
+        verb.defaultVerbs = [...sumerianVerbs];
       } catch (err) {
         alert("Unable to fetch Sumerian Verbs!");
       }
@@ -73,29 +90,32 @@
 
   // select verb
   const selectVerb = event => {
-    // find verb
-    const selection = sumerianVerbs.filter(
-      verb => verb.id === event.target.value
-    )[0];
-    selectedVerb = { ...selection };
-    if (selectedVerb) {
-      // verb stem is different for perfective and imperfective
-      let stem = undefined;
-      if (verb.aspect === "perfective") {
-        stem = selection.value;
-      } else if (verb.aspect === "imperfective") {
-        stem = selection.imperfective.form;
-      } else {
-        // no aspect selected yet
-        stem = selection.value;
+    const id = event.target.value;
+    if (id && id !== "default") {
+      // find verb
+      const selection = sumerianVerbs.filter(verb => verb.id === id)[0];
+      selectedVerb = { ...selection };
+      if (selectedVerb) {
+        // verb stem is different for perfective and imperfective
+        let stem = undefined;
+        if (verb.aspect === "perfective") {
+          stem = selection.value;
+        } else if (verb.aspect === "imperfective") {
+          stem = selection.imperfective.form;
+        } else {
+          // no aspect selected yet
+          stem = selection.value;
+        }
+        verb = {
+          ...verb,
+          verbID: selection.id,
+          stem,
+          transitive: selection.transitive,
+          aspect: "perfective"
+        };
       }
-      verb = {
-        ...verb,
-        verbID: selection.id,
-        stem,
-        transitive: selection.transitive,
-        aspect: "perfective"
-      };
+    } else {
+      return undefined;
     }
   };
   // select transitivity
@@ -188,7 +208,7 @@
     };
   };
 
-  $: console.log(verb);
+  //$: console.log(verb);
 </script>
 
 <style>
@@ -198,61 +218,74 @@
 
   .grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 0.5fr 1fr 0.5fr 1fr 0.5fr;
     grid-template-rows: auto;
     margin: 0px 20px;
   }
 
   .col {
     padding: 10px;
-    justify-self: center;
-    align-self: center;
+    justify-self: left;
+    align-self: top;
+  }
+
+  .row {
+    padding: 3px;
   }
 </style>
 
 <main>
   <div class="grid">
-    <!-- First row -->
+    <!-- Empty Column-->
+    <div class="col" />
+    <!-- Options Selection -->
     <div class="col">
-      <VerbalStemSelect {sumerianVerbs} on:change={selectVerb} />
+      <div class="row">
+        <VerbalStemSelect {sumerianVerbs} on:change={selectVerb} />
+      </div>
+      <div class="row">
+        <TransitivitySelect
+          on:change={selectTransitivity}
+          value={verb.transitive} />
+      </div>
+      <div class="row">
+        <AspectSelect on:change={selectAspect} value={verb.aspect} />
+      </div>
+      <div class="row">
+        <SubjectSelect on:change={selectSubject} />
+      </div>
+      <div class="row">
+        <DirectObjectSelect on:change={selectDirectObject} />
+      </div>
+      <div class="row">
+        <IndirectObjectSelect on:change={selectIndirectObject} />
+      </div>
+      <div class="row">
+        <ObliqueObjectSelect on:change={selectObliqueObject} />
+      </div>
+      <div class="row">
+        <DimensionalPrefixesSelect on:change={selectDimensionalPrefix} />
+      </div>
+      <div class="row">
+        <InitialPersonPrefixesSelect on:change={selectInitialPersonPrefix} />
+      </div>
+      <div class="row">
+        <PreformativePrefixesSelect on:change={selectPreformative} />
+      </div>
+      <div class="row">
+        <ProcliticsSelect on:change={selectProclitic} />
+      </div>
+      <div class="row">
+        <OptionsSelect {selectOptions} />
+      </div>
     </div>
+    <!-- Empty Column-->
+    <div class="col" />
+    <!-- Results -->
     <div class="col">
-      <TransitivitySelect
-        on:change={selectTransitivity}
-        value={verb.transitive} />
+      <Results {verb} defaultVerbs={sumerianVerbs} />
     </div>
-    <div class="col">
-      <AspectSelect on:change={selectAspect} value={verb.aspect} />
-    </div>
-    <!-- Second row -->
-    <div class="col">
-      <SubjectSelect on:change={selectSubject} />
-    </div>
-    <div class="col">
-      <DirectObjectSelect on:change={selectDirectObject} />
-    </div>
-    <div class="col">
-      <IndirectObjectSelect on:change={selectIndirectObject} />
-    </div>
-    <!-- Third row -->
-    <div class="col">
-      <ObliqueObjectSelect on:change={selectObliqueObject} />
-    </div>
-    <div class="col">
-      <DimensionalPrefixesSelect on:change={selectDimensionalPrefix} />
-    </div>
-    <div class="col">
-      <InitialPersonPrefixesSelect on:change={selectInitialPersonPrefix} />
-    </div>
-    <!-- Fourth row -->
-    <div class="col">
-      <PreformativePrefixesSelect on:change={selectPreformative} />
-    </div>
-    <div class="col">
-      <ProcliticsSelect on:change={selectProclitic} />
-    </div>
-    <div class="col">
-      <OptionsSelect {selectOptions} />
-    </div>
+    <!-- Empty Column-->
+    <div class="col" />
   </div>
 </main>
