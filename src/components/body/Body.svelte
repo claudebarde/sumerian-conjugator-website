@@ -12,6 +12,45 @@
   import ProcliticsSelect from "../selects/ProcliticsSelect.svelte";
   import OptionsSelect from "../selects/OptionsSelect.svelte";
 
+  import { onMount } from "svelte";
+
+  let sumerianVerbs = [];
+
+  // fetches default verbs
+  onMount(async () => {
+    const syncSumerianVerbs = [];
+    // checks if verbs are already saved
+    if (window.sessionStorage.getItem("sumerianVerbs")) {
+      const sumerianVerbsStorage = JSON.parse(
+        window.sessionStorage.getItem("sumerianVerbs")
+      );
+      Object.keys(sumerianVerbsStorage).forEach(key =>
+        syncSumerianVerbs.push(sumerianVerbsStorage[key])
+      );
+      sumerianVerbs = [...syncSumerianVerbs];
+    } else {
+      // fetches sumerian verbs
+      try {
+        const newSumerianVerbs = await fetch(
+          "https://api.jsonbin.io/b/5d3ac5b4db7cf8472fffc6ca"
+        );
+        const sumerianVerbsJSON = await newSumerianVerbs.json();
+        // sets item in session storage
+        window.sessionStorage.setItem(
+          "sumerianVerbs",
+          JSON.stringify(sumerianVerbsJSON["sumerian_verbs"])
+        );
+        // we push verbs into sumerianVerbs variable
+        Object.keys(sumerianVerbsJSON["sumerian_verbs"]).forEach(key =>
+          syncSumerianVerbs.push(sumerianVerbsJSON["sumerian_verbs"][key])
+        );
+        sumerianVerbs = [...syncSumerianVerbs];
+      } catch (err) {
+        alert("Unable to fetch Sumerian Verbs!");
+      }
+    }
+  });
+
   let verb = {
     verbID: 0,
     stem: undefined,
@@ -29,6 +68,127 @@
     reduplicated: undefined,
     defaultVerbs: undefined
   };
+
+  let selectedVerb = {};
+
+  // select verb
+  const selectVerb = event => {
+    // find verb
+    const selection = sumerianVerbs.filter(
+      verb => verb.id === event.target.value
+    )[0];
+    selectedVerb = { ...selection };
+    if (selectedVerb) {
+      // verb stem is different for perfective and imperfective
+      let stem = undefined;
+      if (verb.aspect === "perfective") {
+        stem = selection.value;
+      } else if (verb.aspect === "imperfective") {
+        stem = selection.imperfective.form;
+      } else {
+        // no aspect selected yet
+        stem = selection.value;
+      }
+      verb = {
+        ...verb,
+        verbID: selection.id,
+        stem,
+        transitive: selection.transitive,
+        aspect: "perfective"
+      };
+    }
+  };
+  // select transitivity
+  const selectTransitivity = event => {
+    verb = {
+      ...verb,
+      transitive: event.target.value === "transitive" ? true : false
+    };
+  };
+  // select aspect
+  const selectAspect = event => {
+    const aspect = event.target.value;
+    verb = {
+      ...verb,
+      aspect,
+      stem:
+        aspect === "perfective"
+          ? selectedVerb.value
+          : selectedVerb.imperfective.form
+    };
+  };
+  // select subject
+  const selectSubject = event => {
+    const subject =
+      event.target.value === "default" ? undefined : event.target.value;
+    verb = { ...verb, subject };
+  };
+  // select direct object
+  const selectDirectObject = event => {
+    const directObject =
+      event.target.value === "default" ? undefined : event.target.value;
+    verb = { ...verb, directObject };
+  };
+  // select indirect object
+  const selectIndirectObject = event => {
+    const indirectObject =
+      event.target.value === "default" ? undefined : event.target.value;
+    verb = { ...verb, indirectObject };
+  };
+  // select oblique object
+  const selectObliqueObject = event => {
+    const obliqueObject =
+      event.target.value === "default" ? undefined : event.target.value;
+    verb = { ...verb, obliqueObject };
+  };
+  // select dimensional prefix
+  const selectDimensionalPrefix = event => {
+    // dimensionalPrefix: [{ prefix: undefined, initialPersonPrefix: undefined }],
+    const prefix =
+      event.target.value === "default" ? undefined : event.target.value;
+    verb = {
+      ...verb,
+      dimensionalPrefix: [{ ...verb.dimensionalPrefix[0], prefix }]
+    };
+  };
+  // select initial person prefix
+  const selectInitialPersonPrefix = event => {
+    const initialPersonPrefix =
+      event.target.value === "default" ? undefined : event.target.value;
+    verb = {
+      ...verb,
+      dimensionalPrefix: [
+        {
+          ...verb.dimensionalPrefix[0],
+          initialPersonPrefix
+        }
+      ]
+    };
+  };
+  // select preformative
+  const selectPreformative = event => {
+    const preformative =
+      event.target.value === "default" ? undefined : event.target.value;
+    verb = { ...verb, preformative };
+  };
+  // select proclitic
+  const selectProclitic = event => {
+    const proclitic =
+      event.target.value === "default" ? undefined : event.target.value;
+    verb = { ...verb, proclitic };
+  };
+  // select options
+  const selectOptions = options => {
+    //options = { ventive: true/false, middleMarker: true/false, reduplicatedStem: true/false }
+    verb = {
+      ...verb,
+      ventive: options.ventive,
+      middleMarker: options.middleMarker,
+      reduplicated: options.reduplicated
+    };
+  };
+
+  $: console.log(verb);
 </script>
 
 <style>
@@ -54,43 +214,45 @@
   <div class="grid">
     <!-- First row -->
     <div class="col">
-      <VerbalStemSelect />
+      <VerbalStemSelect {sumerianVerbs} on:change={selectVerb} />
     </div>
     <div class="col">
-      <TransitivitySelect />
+      <TransitivitySelect
+        on:change={selectTransitivity}
+        value={verb.transitive} />
     </div>
     <div class="col">
-      <AspectSelect />
+      <AspectSelect on:change={selectAspect} value={verb.aspect} />
     </div>
     <!-- Second row -->
     <div class="col">
-      <SubjectSelect />
+      <SubjectSelect on:change={selectSubject} />
     </div>
     <div class="col">
-      <DirectObjectSelect />
+      <DirectObjectSelect on:change={selectDirectObject} />
     </div>
     <div class="col">
-      <IndirectObjectSelect />
+      <IndirectObjectSelect on:change={selectIndirectObject} />
     </div>
     <!-- Third row -->
     <div class="col">
-      <ObliqueObjectSelect />
+      <ObliqueObjectSelect on:change={selectObliqueObject} />
     </div>
     <div class="col">
-      <DimensionalPrefixesSelect />
+      <DimensionalPrefixesSelect on:change={selectDimensionalPrefix} />
     </div>
     <div class="col">
-      <InitialPersonPrefixesSelect />
+      <InitialPersonPrefixesSelect on:change={selectInitialPersonPrefix} />
     </div>
     <!-- Fourth row -->
     <div class="col">
-      <PreformativePrefixesSelect />
+      <PreformativePrefixesSelect on:change={selectPreformative} />
     </div>
     <div class="col">
-      <ProcliticsSelect />
+      <ProcliticsSelect on:change={selectProclitic} />
     </div>
     <div class="col">
-      <OptionsSelect />
+      <OptionsSelect {selectOptions} />
     </div>
   </div>
 </main>

@@ -1,5 +1,5 @@
 <label for="subject">Subject:</label>
-<select name="subject" id="subject">
+<select name="subject" id="subject" on:change>
   <option value="default">Please choose an option</option>
   <option value="firstSingular">First person singular</option>
   <option value="secondSingular">Second person singular</option>

@@ -1,5 +1,5 @@
 <label for="oblique-object">Oblique Object:</label>
-<select name="oblique-object" id="oblique-object">
+<select name="oblique-object" id="oblique-object" on:change>
   <option value="default">Please choose an option</option>
   <option value="firstSingular">First person singular</option>
   <option value="secondSingular">Second person singular</option>

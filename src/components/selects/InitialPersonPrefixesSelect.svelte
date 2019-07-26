@@ -1,5 +1,5 @@
 <label for="initial-person-prefixes">Initial Person Prefixes:</label>
-<select name="initial-person-prefixes" id="initial-person-prefixes">
+<select name="initial-person-prefixes" id="initial-person-prefixes" on:change>
   <option value="default">Please choose an option</option>
   <option value="firstSingular">First person singular</option>
   <option value="secondSingular">Second person singular</option>

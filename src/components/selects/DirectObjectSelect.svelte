@@ -1,5 +1,5 @@
 <label for="direct-object">Direct Object:</label>
-<select name="direct-object" id="direct-object">
+<select name="direct-object" id="direct-object" on:change>
   <option value="default">Please choose an option</option>
   <option value="firstSingular">First person singular</option>
   <option value="secondSingular">Second person singular</option>
