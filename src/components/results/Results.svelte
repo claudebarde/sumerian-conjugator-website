@@ -64,6 +64,10 @@
     .results {
       position: relative;
     }
+
+    .cuneiforms {
+      font-size: 1.3rem;
+    }
   }
 </style>
 
