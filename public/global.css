@@ -65,6 +65,12 @@ select {
   border-radius: 25px;
   border: none;
 }
+
+@media only screen and (min-device-width: 300px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
+  body {
+    overflow: auto;
+  }
+}
 /*
 a {
   color: rgb(0, 100, 200);

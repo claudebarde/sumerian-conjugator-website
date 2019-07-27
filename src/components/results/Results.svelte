@@ -1,4 +1,5 @@
 <script>
+  import { fly } from "svelte/transition";
   import sumerianConjugator from "../../sumerian-conjugator/sumerian-conjugator.js";
   import ColorizedVerb from "./colorizeAffixes.svelte";
 
@@ -62,48 +63,52 @@
 
 <div class="results" id="results-div">
   {#if results}
-    <div class="container">
-      <h4>
-        Verb Chain
-        <img src="images/link.svg" alt="chain" />
-      </h4>
-      <p>
-        {results.conjugatedVerb}
-        <span style="color:#bfbfbf;">({displayVerbMeanings()})</span>
-      </p>
-      <p>
-        <ColorizedVerb {COLORS} verb={results} />
-      </p>
-    </div>
-    <div class="container">
-      <h4>
-        Cuneiforms
-        <img src="images/hash.svg" alt="hash" />
-      </h4>
-      <p class="cuneiforms">
-        {results.cuneiforms ? results.cuneiforms.chain : 'No cuneiforms'}
-      </p>
-    </div>
-    <div class="container">
-      <h4>
-        Affixes
-        <img src="images/grid.svg" alt="grid" />
-      </h4>
-      {#each results.affixes as affix}
-        <p>{`${affix.function} => ${affix.form} (${affix.rawForm})`}</p>
-      {/each}
-    </div>
-    {#if results.notes.length > 0}
-      <div class="container noborder">
+    <div transition:fly={{ y: 100, duration: 500 }}>
+      <div class="container">
         <h4>
-          Notes
-          <img src="images/edit-3.svg" alt="notes" />
+          Verb Chain
+          <img src="images/link.svg" alt="chain" />
         </h4>
-        {#each results.notes as note}
-          <p class="notes">- {note}</p>
+        <p>
+          {results.conjugatedVerb}
+          <span style="color:#bfbfbf;">({displayVerbMeanings()})</span>
+        </p>
+        <p>
+          <ColorizedVerb {COLORS} verb={results} />
+        </p>
+      </div>
+      <div class="container">
+        <h4>
+          Cuneiforms
+          <img src="images/hash.svg" alt="hash" />
+        </h4>
+        {#if results.cuneiforms}
+          <p class="cuneiforms">{results.cuneiforms.chain}</p>
+        {:else}
+          <p>No cuneiforms</p>
+        {/if}
+      </div>
+      <div class="container">
+        <h4>
+          Affixes
+          <img src="images/grid.svg" alt="grid" />
+        </h4>
+        {#each results.affixes as affix}
+          <p>{`${affix.function} => ${affix.form} (${affix.rawForm})`}</p>
         {/each}
       </div>
-    {/if}
+      {#if results.notes.length > 0}
+        <div class="container noborder">
+          <h4>
+            Notes
+            <img src="images/edit-3.svg" alt="notes" />
+          </h4>
+          {#each results.notes as note}
+            <p class="notes">- {note}</p>
+          {/each}
+        </div>
+      {/if}
+    </div>
   {:else}
     <div class="container noborder">No results to show!</div>
   {/if}

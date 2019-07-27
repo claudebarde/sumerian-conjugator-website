@@ -217,7 +217,7 @@
 
 <style>
   main {
-    margin-top: 5rem;
+    margin-top: 1rem;
   }
   .conjugator {
     display: flex;
@@ -227,8 +227,8 @@
 
   .col {
     padding: 10px;
-    /*border: solid 1px grey;*/
     width: 35%;
+    /*border: solid 1px grey;*/
   }
 
   .left-col {
@@ -253,6 +253,7 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin: 5px;
   }
 
   .tip {
@@ -260,6 +261,18 @@
     background-color: #e8e8e8;
     padding: 8px;
     border-radius: 5px;
+  }
+
+  @media only screen and (min-device-width: 300px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
+    .conjugator {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .col {
+      width: 80%;
+    }
   }
 </style>
 
