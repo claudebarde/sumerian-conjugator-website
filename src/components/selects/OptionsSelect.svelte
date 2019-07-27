@@ -1,19 +1,9 @@
 <script>
-  export let selectOptions;
-  let options = {
-    ventive: false,
-    middleMarker: false,
-    reduplicatedStem: false
-  };
-  export let COLORS;
+  import { createEventDispatcher } from "svelte";
 
-  const updateOptions = (type, value) => {
-    const newOptions = { ...options, [type]: value };
-    // we update the options
-    options = { ...newOptions };
-    // we pass the new options to parent component
-    selectOptions(options);
-  };
+  const dispatch = createEventDispatcher();
+
+  export let COLORS;
 </script>
 
 <style>
@@ -35,7 +25,7 @@
       type="checkbox"
       id="ventive"
       name="ventive"
-      on:change={event => updateOptions('ventive', event.target.checked)} />
+      on:change={event => dispatch('ventive', event.target.checked)} />
     <label for="ventive">Ventive</label>
   </div>
   <div class="color-tag" style={`background-color:${COLORS.ventive}`} />
@@ -46,7 +36,7 @@
       type="checkbox"
       id="middle-marker"
       name="middle-marker"
-      on:change={event => updateOptions('middleMarker', event.target.checked)} />
+      on:change={event => dispatch('middleMarker', event.target.checked)} />
     <label for="middle-marker">Middle Marker</label>
   </div>
   <div class="color-tag" style={`background-color:${COLORS.middleMarker}`} />
@@ -57,7 +47,7 @@
       type="checkbox"
       id="reduplicated-stem"
       name="reduplicated-stem"
-      on:change={event => updateOptions('reduplicatedStem', event.target.checked)} />
+      on:change={event => dispatch('reduplicated', event.target.checked)} />
     <label for="reduplicated-stem">Reduplicated Stem</label>
   </div>
   <div class="color-tag" style={`background-color:${COLORS.reduplicated}`} />

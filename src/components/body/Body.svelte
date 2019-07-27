@@ -361,7 +361,9 @@
       </div>
       <div class="row">
         <OptionsSelect
-          {selectOptions}
+          on:ventive={value => (verb = { ...verb, ventive: value.detail })}
+          on:middleMarker={value => (verb = { ...verb, middleMarker: value.detail })}
+          on:reduplicated={value => (verb = { ...verb, reduplicated: value.detail })}
           COLORS={{ ventive: COLORS.ventive, middleMarker: COLORS.middleMarker, reduplicated: COLORS.reduplicated }} />
       </div>
     </div>

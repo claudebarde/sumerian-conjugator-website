@@ -7,6 +7,8 @@
   let coloredSuffixes = [].fill("", 0, 2);
 
   $: if (verb) {
+    coloredPrefixes = [].fill("", 0, 10);
+    coloredSuffixes = [].fill("", 0, 2);
     // we loop through the affixes in order
     verb.affixes.forEach(item => {
       if (item.type === "prefix") {
