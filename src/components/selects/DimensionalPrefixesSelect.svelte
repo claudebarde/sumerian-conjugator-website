@@ -1,4 +1,11 @@
-<label for="dimensional-prefixes">Dimensional Prefixes:</label>
+<script>
+  export let color = "#ffffff";
+</script>
+
+<label for="dimensional-prefixes">
+  <div>Dimensional Prefixes:</div>
+  <div class="color-tag" style={`background-color:${color}`} />
+</label>
 <select name="dimensional-prefixes" id="dimensional-prefixes" on:change>
   <option value="default">Please choose an option</option>
   <option value="with">DA</option>

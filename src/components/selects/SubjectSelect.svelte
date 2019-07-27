@@ -1,4 +1,14 @@
-<label for="subject">Subject:</label>
+<script>
+  export let color = "#ffffff";
+</script>
+
+<label for="subject">
+  <div>
+    <span style="color:red;">*</span>
+    Subject:
+  </div>
+  <div class="color-tag" style={`background-color:${color}`} />
+</label>
 <select name="subject" id="subject" on:change>
   <option value="default">Please choose an option</option>
   <optgroup label="Singular">

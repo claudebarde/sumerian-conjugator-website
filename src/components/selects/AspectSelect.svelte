@@ -2,7 +2,12 @@
   export let value = undefined;
 </script>
 
-<label for="aspect">Aspect:</label>
+<label for="aspect">
+  <div>
+    <span style="color:red;">*</span>
+    Aspect:
+  </div>
+</label>
 <select name="aspect" id="aspect" on:change>
   <option value="default" selected={value === undefined}>
     Please choose an option

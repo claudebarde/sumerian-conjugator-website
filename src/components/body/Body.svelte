@@ -16,6 +16,7 @@
   import { onMount } from "svelte";
 
   let sumerianVerbs = [];
+  let resultsWidth;
 
   const COLORS = {
     subject: "#597ef7",
@@ -66,6 +67,9 @@
         alert("Unable to fetch Sumerian Verbs!");
       }
     }
+
+    // sets results width because of fixed position
+    resultsWidth = document.getElementById("results-col").offsetWidth;
   });
 
   let verb = {
@@ -204,7 +208,7 @@
       ...verb,
       ventive: options.ventive,
       middleMarker: options.middleMarker,
-      reduplicated: options.reduplicated
+      reduplicated: options.reduplicatedStem
     };
   };
 
@@ -215,31 +219,63 @@
   main {
     margin-top: 5rem;
   }
-
-  .grid {
-    display: grid;
-    grid-template-columns: 0.5fr 1fr 0.5fr 1fr 0.5fr;
-    grid-template-rows: auto;
-    margin: 0px 20px;
+  .conjugator {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
   }
 
   .col {
     padding: 10px;
-    justify-self: left;
-    align-self: top;
+    /*border: solid 1px grey;*/
+    width: 35%;
+  }
+
+  .left-col {
+    margin-right: 20px;
+    height: 80vh;
+    overflow: auto;
+  }
+  .left-col::-webkit-scrollbar {
+    width: 0px; /* Remove scrollbar space */
+    background: transparent; /* Optional: just make scrollbar invisible */
+  }
+
+  .right-col {
+    margin-left: 20px;
   }
 
   .row {
     padding: 3px;
   }
+
+  .tip-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .tip {
+    border: solid 1px #e8e8e8;
+    background-color: #e8e8e8;
+    padding: 6px;
+    border-radius: 5px;
+  }
 </style>
 
 <main>
-  <div class="grid">
-    <!-- Empty Column-->
-    <div class="col" />
+  <div class="tip-container">
+    <div class="tip">
+      You must install a cuneiform font to use the conjugator, for example
+      <a href="http://users.teilar.gr/~g1951d/Akkadian.zip" target="_blank">
+        here
+      </a>
+      .
+    </div>
+  </div>
+  <div class="conjugator">
     <!-- Options Selection -->
-    <div class="col">
+    <div class="col left-col">
       <div class="row">
         <VerbalStemSelect {sumerianVerbs} on:change={selectVerb} />
       </div>
@@ -252,40 +288,56 @@
         <AspectSelect on:change={selectAspect} value={verb.aspect} />
       </div>
       <div class="row">
-        <SubjectSelect on:change={selectSubject} />
+        <SubjectSelect on:change={selectSubject} color={COLORS.subject} />
       </div>
       <div class="row">
-        <DirectObjectSelect on:change={selectDirectObject} />
+        <DirectObjectSelect
+          on:change={selectDirectObject}
+          color={COLORS.directObject} />
       </div>
       <div class="row">
-        <IndirectObjectSelect on:change={selectIndirectObject} />
+        <IndirectObjectSelect
+          on:change={selectIndirectObject}
+          color={COLORS.indirectObject} />
       </div>
       <div class="row">
-        <ObliqueObjectSelect on:change={selectObliqueObject} />
+        <ObliqueObjectSelect
+          on:change={selectObliqueObject}
+          color={COLORS.obliqueObject} />
       </div>
       <div class="row">
-        <DimensionalPrefixesSelect on:change={selectDimensionalPrefix} />
+        <DimensionalPrefixesSelect
+          on:change={selectDimensionalPrefix}
+          color={COLORS.dimensionalPrefix} />
       </div>
       <div class="row">
-        <InitialPersonPrefixesSelect on:change={selectInitialPersonPrefix} />
+        <InitialPersonPrefixesSelect
+          on:change={selectInitialPersonPrefix}
+          color={COLORS.initialPersonPrefix} />
       </div>
       <div class="row">
-        <PreformativePrefixesSelect on:change={selectPreformative} />
+        <PreformativePrefixesSelect
+          on:change={selectPreformative}
+          color={COLORS.preformative} />
       </div>
       <div class="row">
-        <ProcliticsSelect on:change={selectProclitic} />
+        <ProcliticsSelect
+          on:change={selectProclitic}
+          color={COLORS.proclitic} />
       </div>
       <div class="row">
-        <OptionsSelect {selectOptions} />
+        <OptionsSelect
+          {selectOptions}
+          COLORS={{ ventive: COLORS.ventive, middleMarker: COLORS.middleMarker, reduplicated: COLORS.reduplicated }} />
       </div>
     </div>
-    <!-- Empty Column-->
-    <div class="col" />
     <!-- Results -->
-    <div class="col">
-      <Results {verb} defaultVerbs={sumerianVerbs} />
+    <div class="col right-col" id="results-col">
+      <Results
+        {verb}
+        defaultVerbs={sumerianVerbs}
+        resultsWidth={resultsWidth - 20 + 'px'}
+        {COLORS} />
     </div>
-    <!-- Empty Column-->
-    <div class="col" />
   </div>
 </main>

@@ -2,7 +2,12 @@
   export let value = undefined;
 </script>
 
-<label for="transitivity">Transitivity:</label>
+<label for="transitivity">
+  <div>
+    <span style="color:red;">*</span>
+    Transitivity:
+  </div>
+</label>
 <select name="transitivity" id="transitivity" on:change>
   <option value="default" selected={value === undefined}>
     Please choose an option
