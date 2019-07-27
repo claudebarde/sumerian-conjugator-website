@@ -233,7 +233,7 @@
 
   .left-col {
     margin-right: 20px;
-    height: 80vh;
+    height: 75vh;
     overflow: auto;
   }
   .left-col::-webkit-scrollbar {
@@ -253,7 +253,7 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin: 5px;
+    margin: 5px 5px 10px 5px;
   }
 
   .tip {
@@ -264,6 +264,11 @@
   }
 
   @media only screen and (min-device-width: 300px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
+    main {
+      margin-top: 0.5rem;
+      overflow: auto;
+    }
+
     .conjugator {
       display: flex;
       flex-direction: column;
@@ -271,7 +276,23 @@
     }
 
     .col {
-      width: 80%;
+      padding: 4px;
+      width: 90%;
+      /*border: solid 1px grey;*/
+    }
+
+    .left-col {
+      margin: 4px;
+      height: 100%;
+      overflow: auto;
+    }
+
+    .right-col {
+      margin: 4px;
+    }
+
+    .tip {
+      font-size: 0.6rem;
     }
   }
 </style>
