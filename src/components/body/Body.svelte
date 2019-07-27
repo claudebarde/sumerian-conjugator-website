@@ -258,7 +258,7 @@
   .tip {
     border: solid 1px #e8e8e8;
     background-color: #e8e8e8;
-    padding: 6px;
+    padding: 8px;
     border-radius: 5px;
   }
 </style>
