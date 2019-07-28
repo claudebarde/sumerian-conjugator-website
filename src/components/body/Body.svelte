@@ -265,7 +265,6 @@
 
   @media only screen and (min-device-width: 300px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
     main {
-      height: 100%;
       margin-top: 6rem;
     }
 
@@ -290,6 +289,7 @@
 
     .right-col {
       margin: 4px;
+      height: 100%;
     }
 
     .tip {
