@@ -265,15 +265,13 @@
 
   @media only screen and (min-device-width: 300px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
     main {
-      margin-top: 0.5rem;
-      overflow: auto;
+      margin-top: 6rem;
     }
 
     .conjugator {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      overflow: auto;
     }
 
     .col {

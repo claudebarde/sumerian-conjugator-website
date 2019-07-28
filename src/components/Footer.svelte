@@ -1,8 +1,6 @@
 <style>
   footer {
     width: 100%;
-    top: 0;
-    left: 0;
     background: #ffd591;
     display: flex;
     flex-direction: row;
@@ -39,5 +37,5 @@
       Modern Sumerian Project
     </a>
   </div>
-  <div>Version 1.0.0</div>
+  <div>Version 1.1.0</div>
 </footer>

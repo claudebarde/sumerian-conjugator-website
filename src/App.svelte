@@ -19,10 +19,8 @@
     .grid {
       height: 100vh;
       width: 100%;
-      display: grid;
-      grid-template-columns: 1fr;
-      grid-template-rows: 10% 80% 10%;
-      overflow: hidden;
+      display: block;
+      overflow: auto;
     }
   }
 </style>
