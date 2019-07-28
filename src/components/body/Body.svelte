@@ -265,6 +265,7 @@
 
   @media only screen and (min-device-width: 300px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
     main {
+      height: 100%;
       margin-top: 6rem;
     }
 
@@ -304,7 +305,7 @@
       <a href="http://users.teilar.gr/~g1951d/Akkadian.zip" target="_blank">
         here
       </a>
-      . v1
+      . v2
     </div>
   </div>
   <div class="conjugator">

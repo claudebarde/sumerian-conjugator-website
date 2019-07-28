@@ -17,7 +17,7 @@
 
   @media only screen and (min-device-width: 300px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
     .grid {
-      height: 100vh;
+      height: 100%;
       width: 100%;
       display: block;
       overflow: auto;
