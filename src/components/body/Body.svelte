@@ -266,25 +266,24 @@
   @media only screen and (min-device-width: 300px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
     main {
       margin-top: 6rem;
-    }
-
-    .conjugator {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
       overflow: auto;
     }
 
     .col {
       padding: 4px;
       width: 90%;
-      /*border: solid 1px grey;*/
+    }
+
+    .conjugator {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .left-col {
       margin: 4px;
       height: 100%;
-      overflow: auto;
+      overflow: visible;
     }
 
     .right-col {
@@ -305,7 +304,7 @@
       <a href="http://users.teilar.gr/~g1951d/Akkadian.zip" target="_blank">
         here
       </a>
-      . v2
+      . v3/ {resultsWidth}
     </div>
   </div>
   <div class="conjugator">
