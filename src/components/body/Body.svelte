@@ -273,6 +273,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      overflow: auto;
     }
 
     .col {
@@ -284,7 +285,6 @@
     .left-col {
       margin: 4px;
       height: 100%;
-      overflow: auto;
     }
 
     .right-col {
