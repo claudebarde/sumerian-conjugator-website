@@ -284,6 +284,7 @@
       margin: 4px;
       height: 100%;
       overflow: visible;
+      border-bottom: solid 1px #ccc;
     }
 
     .right-col {
@@ -304,7 +305,6 @@
       <a href="http://users.teilar.gr/~g1951d/Akkadian.zip" target="_blank">
         here
       </a>
-      . v3/ {resultsWidth}
     </div>
   </div>
   <div class="conjugator">
