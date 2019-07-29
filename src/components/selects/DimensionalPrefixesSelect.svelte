@@ -6,8 +6,12 @@
   <div>Dimensional Prefixes:</div>
   <div class="color-tag" style={`background-color:${color}`} />
 </label>
-<select name="dimensional-prefixes" id="dimensional-prefixes" on:change>
-  <option value="default">Please choose an option</option>
+<select
+  
+  name="dimensional-prefixes"
+  id="dimensional-prefixes"
+  on:change>
+  <option value="default" disabled selected>Please choose an option</option>
   <option value="with">DA</option>
   <option value="from">TA</option>
   <option value="towards">SHI</option>

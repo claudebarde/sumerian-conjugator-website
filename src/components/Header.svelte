@@ -10,6 +10,7 @@
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 6px #bfbfbf;
+    z-index: 50;
   }
 
   .left-icons {

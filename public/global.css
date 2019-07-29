@@ -28,16 +28,9 @@ label {
   width: 100%;
 }
 
-/*select {
-  width: 100%;
-  font-size: inherit;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 2px;
-  box-shadow: 0 2px 6px #bfbfbf;
-}*/
-
 select {
+  border-radius: 2px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
   -webkit-appearance: button;
   -webkit-border-radius: 2px;
   -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
@@ -71,6 +64,11 @@ select {
 @media only screen and (min-device-width: 300px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
   body {
     overflow: auto;
+  }
+
+  select {
+    font-size: 0.7rem;
+    height: 32px;
   }
 }
 /*

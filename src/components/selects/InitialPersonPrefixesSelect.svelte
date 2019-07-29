@@ -7,7 +7,7 @@
   <div class="color-tag" style={`background-color:${color}`} />
 </label>
 <select name="initial-person-prefixes" id="initial-person-prefixes" on:change>
-  <option value="default">Please choose an option</option>
+  <option value="default" disabled selected>Please choose an option</option>
   <optgroup label="Singular">
     <option value="firstSingular">First person</option>
     <option value="secondSingular">Second person</option>

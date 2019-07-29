@@ -9,9 +9,7 @@
   </div>
 </label>
 <select name="aspect" id="aspect" on:change>
-  <option value="default" selected={value === undefined}>
-    Please choose an option
-  </option>
+  <option value="default" disabled selected>Please choose an option</option>
   <option value="perfective" selected={value === 'perfective'}>
     Perfective
   </option>
