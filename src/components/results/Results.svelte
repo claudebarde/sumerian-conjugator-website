@@ -2,6 +2,7 @@
   import { fly } from "svelte/transition";
   import sumerianConjugator from "../../sumerian-conjugator/sumerian-conjugator.js";
   import ColorizedVerb from "./colorizeAffixes.svelte";
+  import AffixesTable from "./AffixesTable.svelte";
 
   export let verb = {};
   export let defaultVerbs = [];
@@ -54,6 +55,13 @@
   .results {
     position: fixed;
     min-width: 100px;
+    overflow: auto;
+    height: 80%;
+  }
+
+  .results::-webkit-scrollbar {
+    width: 0px; /* Remove scrollbar space */
+    background: transparent; /* Optional: just make scrollbar invisible */
   }
 
   .cuneiforms {
@@ -103,9 +111,7 @@
           Affixes
           <img src="images/grid.svg" alt="grid" />
         </h4>
-        {#each results.affixes as affix}
-          <p>{`${affix.function} => ${affix.form} (${affix.rawForm})`}</p>
-        {/each}
+        <AffixesTable affixes={results.affixes} />
       </div>
       {#if results.notes.length > 0}
         <div class="container noborder">

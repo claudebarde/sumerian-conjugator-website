@@ -247,13 +247,6 @@
 
   .row {
     padding: 3px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-  }
-
-  .inner-row {
-    padding: 4px;
   }
 
   .tip-container {
@@ -319,65 +312,53 @@
     <!-- Options Selection -->
     <div class="col left-col">
       <div class="row">
-        <div class="inner-row">
-          <VerbalStemSelect {sumerianVerbs} on:change={selectVerb} />
-        </div>
+        <VerbalStemSelect {sumerianVerbs} on:change={selectVerb} />
       </div>
       <div class="row">
-        <div class="inner-row">
-          <TransitivitySelect
-            on:change={selectTransitivity}
-            value={verb.transitive} />
-        </div>
-        <div class="inner-row">
-          <AspectSelect on:change={selectAspect} value={verb.aspect} />
-        </div>
+        <TransitivitySelect
+          on:change={selectTransitivity}
+          value={verb.transitive} />
       </div>
       <div class="row">
-        <div class="inner-row">
-          <SubjectSelect on:change={selectSubject} color={COLORS.subject} />
-        </div>
-        <div class="inner-row">
-          <DirectObjectSelect
-            on:change={selectDirectObject}
-            color={COLORS.directObject} />
-        </div>
+        <AspectSelect on:change={selectAspect} value={verb.aspect} />
       </div>
       <div class="row">
-        <div class="inner-row">
-          <IndirectObjectSelect
-            on:change={selectIndirectObject}
-            color={COLORS.indirectObject} />
-        </div>
-        <div class="inner-row">
-          <ObliqueObjectSelect
-            on:change={selectObliqueObject}
-            color={COLORS.obliqueObject} />
-        </div>
+        <SubjectSelect on:change={selectSubject} color={COLORS.subject} />
       </div>
       <div class="row">
-        <div class="inner-row">
-          <DimensionalPrefixesSelect
-            on:change={selectDimensionalPrefix}
-            color={COLORS.dimensionalPrefix} />
-        </div>
-        <div class="inner-row">
-          <InitialPersonPrefixesSelect
-            on:change={selectInitialPersonPrefix}
-            color={COLORS.initialPersonPrefix} />
-        </div>
+        <DirectObjectSelect
+          on:change={selectDirectObject}
+          color={COLORS.directObject} />
       </div>
       <div class="row">
-        <div class="inner-row">
-          <PreformativePrefixesSelect
-            on:change={selectPreformative}
-            color={COLORS.preformative} />
-        </div>
-        <div class="inner-row">
-          <ProcliticsSelect
-            on:change={selectProclitic}
-            color={COLORS.proclitic} />
-        </div>
+        <IndirectObjectSelect
+          on:change={selectIndirectObject}
+          color={COLORS.indirectObject} />
+      </div>
+      <div class="row">
+        <ObliqueObjectSelect
+          on:change={selectObliqueObject}
+          color={COLORS.obliqueObject} />
+      </div>
+      <div class="row">
+        <DimensionalPrefixesSelect
+          on:change={selectDimensionalPrefix}
+          color={COLORS.dimensionalPrefix} />
+      </div>
+      <div class="row">
+        <InitialPersonPrefixesSelect
+          on:change={selectInitialPersonPrefix}
+          color={COLORS.initialPersonPrefix} />
+      </div>
+      <div class="row">
+        <PreformativePrefixesSelect
+          on:change={selectPreformative}
+          color={COLORS.preformative} />
+      </div>
+      <div class="row">
+        <ProcliticsSelect
+          on:change={selectProclitic}
+          color={COLORS.proclitic} />
       </div>
       <div class="row">
         <OptionsSelect

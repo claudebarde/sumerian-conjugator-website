@@ -6,11 +6,7 @@
   <div>Direct Object:</div>
   <div class="color-tag" style={`background-color:${color}`} />
 </label>
-<select
-  
-  name="direct-object"
-  id="direct-object"
-  on:change>
+<select name="direct-object" id="direct-object" on:change>
   <option value="default" disabled selected>Please choose an option</option>
   <optgroup label="Singular">
     <option value="firstSingular">First person</option>

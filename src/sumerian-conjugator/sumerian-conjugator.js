@@ -67,7 +67,6 @@ module.exports = ({
   directObject,
   obliqueObject,
   dimensionalPrefix,
-  initialPersonPrefix,
   indirectObject,
   ventive,
   middleMarker,
