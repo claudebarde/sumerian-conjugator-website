@@ -1,7 +1,5 @@
 <script>
   export let affixes = [];
-
-  console.log(affixes);
 </script>
 
 <style>
