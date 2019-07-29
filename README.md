@@ -1,70 +1,28 @@
-*Psst — looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
+# The Sumerian Verb Conjugator
 
----
+The Sumerian Verb Conjugator is an online demo of the capabilities of the [sumerian-conjugator package](https://github.com/claudebarde/ModernSumerianVerbConjugator).
 
-# svelte app
+It uses only [Svelte](https://svelte.dev/), styling is done in pure CSS.
 
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
-
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
+## Installation
 
 ```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
-```
-
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
-
-
-## Get started
-
-Install the dependencies...
-
-```bash
-cd svelte-app
 npm install
 ```
 
-...then start [Rollup](https://rollupjs.org):
+Clone the repo and install the dependencies.
 
-```bash
-npm run dev
-```
+## Usage of the website
 
-Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
+Select the various options available on the left side of the app to build the verb.
 
+The result will appear on the right side of the app and includes the following elements:
 
-## Deploying to the web
+- The verb chain with the actual verb, its meaning between parentheses and a color-coded break-down of its elements
+- The cuneiform representation of the verb
+- The affixes used in the verb, noted as follows: "function" => actual form (raw form)
+- Various notes about grammatical issues or information
 
-### With [now](https://zeit.co/now)
+## License
 
-Install `now` if you haven't already:
-
-```bash
-npm install -g now
-```
-
-Then, from within your project folder:
-
-```bash
-cd public
-now
-```
-
-As an alternative, use the [Now desktop client](https://zeit.co/download) and simply drag the unzipped project folder to the taskbar icon.
-
-### With [surge](https://surge.sh/)
-
-Install `surge` if you haven't already:
-
-```bash
-npm install -g surge
-```
-
-Then, from within your project folder:
-
-```bash
-npm run build
-surge public
-```
-# sumerian-conjugator-website
+[MIT](https://choosealicense.com/licenses/mit/)
