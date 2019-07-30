@@ -27,7 +27,7 @@
     <th>Form</th>
     <th>Raw Form</th>
   </tr>
-  {#each affixes as affix}
+  {#each affixes as affix (affix.function.replace(' ', ''))}
     <tr>
       <td>{affix.type}</td>
       <td>{affix.function}</td>

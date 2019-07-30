@@ -20,6 +20,11 @@
     text-align: center;
   }
 
+  .svelte-icon {
+    height: 1.2rem;
+    vertical-align: middle;
+  }
+
   @media only screen and (min-device-width: 300px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
     footer {
       display: flex;
@@ -37,5 +42,8 @@
       Modern Sumerian Project
     </a>
   </div>
-  <div>Version 1.2.1</div>
+  <div>
+    Version 1.2.1 - Powered by Svelte
+    <img class="svelte-icon" src="images/svelte-icon.png" alt="svelte" />
+  </div>
 </footer>
