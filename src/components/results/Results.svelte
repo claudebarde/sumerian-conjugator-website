@@ -1,5 +1,5 @@
 <script>
-  import { fly } from "svelte/transition";
+  import { fade, fly } from "svelte/transition";
   import sumerianConjugator from "../../sumerian-conjugator/sumerian-conjugator.js";
   import ColorizedVerb from "./colorizeAffixes.svelte";
   import AffixesTable from "./AffixesTable.svelte";
@@ -9,9 +9,21 @@
   export let COLORS;
   export let resultsWidth;
   let results;
+  let visibleCuneiforms = false;
+  let visibleVerbChain = false;
 
   // we get the data about the verb
-  $: results = sumerianConjugator(verb);
+  $: if (verb) {
+    // cuneiforms transition animation
+    visibleCuneiforms = false;
+    visibleVerbChain = false;
+
+    setTimeout(() => {
+      results = sumerianConjugator(verb);
+      visibleCuneiforms = true;
+      visibleVerbChain = true;
+    }, 200);
+  }
   // displays verb meanings
   $: displayVerbMeanings = () => {
     const result = defaultVerbs.filter(item => item.id === verb.verbID);
@@ -87,13 +99,19 @@
           Verb Chain
           <img src="images/link.svg" alt="chain" />
         </h4>
-        <p>
-          {results.conjugatedVerb}
-          <span style="color:#bfbfbf;">({displayVerbMeanings()})</span>
-        </p>
-        <p>
-          <ColorizedVerb {COLORS} verb={results} />
-        </p>
+        {#if visibleVerbChain}
+          <div
+            in:fade={{ delay: 250, duration: 300 }}
+            out:fade={{ delay: 250, duration: 300 }}>
+            <p>
+              {results.conjugatedVerb}
+              <span style="color:#bfbfbf;">({displayVerbMeanings()})</span>
+            </p>
+            <p>
+              <ColorizedVerb {COLORS} verb={results} />
+            </p>
+          </div>
+        {/if}
       </div>
       <div class="container">
         <h4>
@@ -101,7 +119,11 @@
           <img src="images/hash.svg" alt="hash" />
         </h4>
         {#if results.cuneiforms}
-          <p class="cuneiforms">{results.cuneiforms.chain}</p>
+          {#if visibleCuneiforms}
+            <p in:fade out:fly={{ x: 100, duration: 300 }} class="cuneiforms">
+              {results.cuneiforms.chain}
+            </p>
+          {/if}
         {:else}
           <p>No cuneiforms</p>
         {/if}
