@@ -1,4 +1,5 @@
 <script>
+  import { fly } from "svelte/transition";
   export let affixes = [];
 </script>
 
@@ -28,7 +29,7 @@
     <th>Raw Form</th>
   </tr>
   {#each affixes as affix (affix.function.replace(' ', ''))}
-    <tr>
+    <tr in:fly={{ y: -50, duration: 200 }} out:fly={{ x: 50, duration: 200 }}>
       <td>{affix.type}</td>
       <td>{affix.function}</td>
       <td>{affix.form || 'Ø'}</td>

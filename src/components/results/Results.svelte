@@ -92,7 +92,7 @@
 </style>
 
 <div class="results" id="results-div">
-  {#if results}
+  {#if results && Object.entries(results).length > 0}
     <div transition:fly={{ y: 100, duration: 500 }}>
       <div class="container">
         <h4>
@@ -101,8 +101,8 @@
         </h4>
         {#if visibleVerbChain}
           <div
-            in:fade={{ delay: 250, duration: 300 }}
-            out:fade={{ delay: 250, duration: 300 }}>
+            in:fly={{ y: -50, duration: 200 }}
+            out:fly={{ x: 50, duration: 200 }}>
             <p>
               {results.conjugatedVerb}
               <span style="color:#bfbfbf;">({displayVerbMeanings()})</span>
@@ -119,8 +119,11 @@
           <img src="images/hash.svg" alt="hash" />
         </h4>
         {#if results.cuneiforms}
-          {#if visibleCuneiforms}
-            <p in:fade out:fly={{ x: 100, duration: 300 }} class="cuneiforms">
+          {#if visibleVerbChain}
+            <p
+              in:fly={{ y: -50, duration: 200 }}
+              out:fly={{ x: 50, duration: 200 }}
+              class="cuneiforms">
               {results.cuneiforms.chain}
             </p>
           {/if}
@@ -135,7 +138,7 @@
         </h4>
         <AffixesTable affixes={results.affixes} />
       </div>
-      {#if results.notes.length > 0}
+      {#if results.notes && results.notes.length > 0}
         <div class="container noborder">
           <h4>
             Notes
