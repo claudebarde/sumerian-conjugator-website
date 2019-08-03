@@ -68,6 +68,8 @@ const splitString = stringWithDelimiters => {
 };
 
 module.exports = ({ word, stem }) => {
+  word = word.replace(/sh/g, "š");
+  stem = stem.replace(/sh/g, "š");
   word = word.toLowerCase().replace(glottalStopReplace, "$1$1");
   // if there are 2 occurence of the same syllable for the stem
   // the second one has more chance to be the stem
@@ -94,8 +96,14 @@ module.exports = ({ word, stem }) => {
   );*/
 
   return {
-    prefixes: splitPrefixes.split("|").filter(e => e),
-    suffixes: splitSuffixes.split("|").filter(e => e)
+    prefixes: splitPrefixes
+      .replace(/š/g, "sh")
+      .split("|")
+      .filter(e => e),
+    suffixes: splitSuffixes
+      .replace(/š/g, "sh")
+      .split("|")
+      .filter(e => e)
   };
 };
 

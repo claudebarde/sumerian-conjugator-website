@@ -1,4 +1,4 @@
-const { SYLLABARY } = require("./syllabaryData");
+const { SYLLABARY } = require("../sections/resources/syllabary/syllabaryData");
 
 const validateSyllable = _syllable => {
   let result;
@@ -48,7 +48,10 @@ module.exports = ({
 }) => {
   if (!defaultVerbs) return;
 
-  const { prefixes, suffixes } = affixes;
+  let { prefixes, suffixes } = affixes;
+  // replaces "sh" with "š" to work with affixes
+  prefixes = prefixes.map(pref => pref.replace(/sh/g, "š"));
+  suffixes = suffixes.map(suf => suf.replace(/sh/g, "š"));
   const VOWELS = ["a", "e", "i", "u"];
   let cuneiforms, cuneiformVerb, cuneiformBase, imperfectiveForm;
   let characters = [];
@@ -119,9 +122,10 @@ module.exports = ({
       const _syllable = SYLLABARY[suffixes[0].toUpperCase()];
       cuneiforms = cuneiforms + validateSyllable(_syllable, cuneiforms);
     } else {
-      if (suffixes[0] === "n") {
+      if (suffixes[0] === "n" || suffixes[0] === "š") {
         // suffix "n" after a vowel ending verb
-        const constructedSuffix = stem[stem.length - 1].toUpperCase() + "N";
+        const constructedSuffix =
+          stem[stem.length - 1].toUpperCase() + suffixes[0].replace("š", "sh");
         const _syllable = SYLLABARY[constructedSuffix.toUpperCase()];
         cuneiforms = cuneiforms + validateSyllable(_syllable, cuneiforms);
       } else if (suffixes[0] === "e") {

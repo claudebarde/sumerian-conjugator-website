@@ -43,7 +43,7 @@
     </a>
   </div>
   <div>
-    Version 1.2.1 - Powered by Svelte
+    Version 1.2.3 - Powered by Svelte
     <img class="svelte-icon" src="images/svelte-icon.png" alt="svelte" />
   </div>
 </footer>
