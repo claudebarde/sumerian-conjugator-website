@@ -31,7 +31,6 @@ export default {
     // some cases you'll need additional configuration —
     // consult the documentation for details:
     // https://github.com/rollup/rollup-plugin-commonjs
-    css({ output: "public/plugins.css" }),
     resolve({
       browser: true,
       dedupe: importee =>

@@ -49,7 +49,7 @@
       // fetches sumerian verbs
       try {
         const newSumerianVerbs = await fetch(
-          "https://api.jsonbin.io/b/5d3ac5b4db7cf8472fffc6ca"
+          "https://api.jsonbin.io/b/5d3ac5b4db7cf8472fffc6ca/1"
         );
         const sumerianVerbsJSON = await newSumerianVerbs.json();
         // sets item in session storage
