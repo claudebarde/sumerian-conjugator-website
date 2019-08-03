@@ -1,4 +1,4 @@
-const { SYLLABARY } = require("../sections/resources/syllabary/syllabaryData");
+const { SYLLABARY } = require("./syllabaryData");
 
 const validateSyllable = _syllable => {
   let result;
